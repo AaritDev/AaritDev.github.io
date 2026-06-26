@@ -160,10 +160,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -1px;
-            min-height: 5.5rem; /* Prevents layout layout jumps during typing */
+            min-height: 5.5rem;
         }
 
-        /* Slide-in elements start hidden and shifted left */
         .hero-content .subtitle,
         .hero-content .description,
         .hero-content .cta-buttons {
@@ -172,7 +171,6 @@
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        /* Triggered via JS after typing finishes */
         .hero-content .reveal-text {
             opacity: 1;
             transform: translateX(0);
@@ -351,7 +349,7 @@
         }
 
         .legacy-content.open {
-            max-height: 2000px;
+            max-height: 3000px;
             transition: max-height 0.8s ease-in-out;
         }
 
@@ -435,8 +433,6 @@
             border-radius: 50%;
         }
 
-        .dot-python { background: #3572A5; }
-
         /* Contact Section */
         .contact {
             text-align: center;
@@ -506,9 +502,39 @@
             transform: translateY(0);
         }
 
+        /* ========================================= */
+        /* MOBILE COMPATIBILITY MEDIA QUERIES        */
+        /* ========================================= */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.8rem; min-height: 3.5rem; }
-            .nav-links { display: none; }
+            /* Navbar modifications to keep it usable */
+            nav { flex-direction: column; gap: 0.8rem; }
+            .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; display: flex; }
+            
+            /* Scale down Hero Section */
+            .hero-content h1 { font-size: 2.5rem; min-height: 3.5rem; margin-top: 2rem;}
+            .hero-content .subtitle { font-size: 1.1rem; }
+            .hero-content .description { font-size: 0.95rem; padding: 0 10px; }
+            
+            /* Stack CTA buttons */
+            .cta-buttons { flex-direction: column; padding: 0 20px; }
+            .cta-button { width: 100%; text-align: center; }
+            
+            /* Section spacing & Grids */
+            section { padding: 60px 0; }
+            .section-title { font-size: 1.8rem; text-align: center; }
+            
+            /* Force skills grid to 1 column to stop horizontal overflow */
+            .skills-grid { grid-template-columns: 1fr; }
+            .upcoming-box { padding: 3rem 1rem; }
+            
+            /* Make GitHub cards fit screen */
+            .repo-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .repo-footer { flex-wrap: wrap; gap: 0.8rem; }
+            .repo-title-wrapper { flex-wrap: wrap; }
+            
+            /* Stack Contact Links */
+            .contact-links { flex-direction: column; padding: 0 20px; }
+            .contact-link { width: 100%; text-align: center; }
         }
     </style>
 </head>
