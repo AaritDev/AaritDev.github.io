@@ -583,10 +583,7 @@
             <div class="legacy-wrapper reveal">
                 <button class="legacy-trigger-btn" onclick="toggleLegacy()">View Legacy Shell & Python Repositories</button>
                 <div id="legacyContent" class="legacy-content">
-                    <div class="legacy-grid">
-
-                        
-
+                    <div class="legacy-grid" id="repoContainer">
                     </div>
                 </div>
             </div>
@@ -643,7 +640,7 @@
                 try{
             
                     const response = await fetch(
-                        "https://api.github.com/users/AaritDev/repos"
+                        "https://api.github.com/users/aaritdev/repos"
                     );
             
                     const repos = await response.json();
@@ -697,7 +694,7 @@
             
                                     <a
                                         class="repo-title"
-                                        href="https://github.com/AaritDev/${repo.name}"
+                                        href="https://github.com/aaritdev/${repo.name}"
                                         target="_blank">
             
                                         ${repo.name}
