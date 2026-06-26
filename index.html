@@ -584,107 +584,8 @@
                 <button class="legacy-trigger-btn" onclick="toggleLegacy()">View Legacy Shell & Python Repositories</button>
                 <div id="legacyContent" class="legacy-content">
                     <div class="legacy-grid">
+
                         
-                        <div class="repo-card">
-                            <div class="repo-header">
-                                <div class="repo-title-wrapper">
-                                    <a href="https://github.com/AaritDev/LAPH" class="repo-title">LAPH</a>
-                                    <span class="repo-badge">Public</span>
-                                </div>
-                            </div>
-                            <div class="repo-desc">Local Autonomous Programming Helper - An advanced AI system writing source material autonomously across multiple design phases including Docker execu[...]
-                            <div class="repo-footer">
-                                <div class="lang-indicator"><span class="lang-dot" style="background:#3572A5;"></span>Python</div>
-                                <span>GNU GPL 3.0</span>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div class="repo-header">
-                                <div class="repo-title-wrapper">
-                                    <a href="#" class="repo-title">Omen-battery-checker</a>
-                                    <span class="repo-badge">Public</span>
-                                </div>
-                            </div>
-                            <div class="repo-desc">A beautiful, translucent battery monitor and charge limiter notification tool for HP OMEN laptops running Linux setups natively.</div>
-                            <div class="repo-footer">
-                                <div class="lang-indicator"><span class="lang-dot" style="background:#3572A5;"></span>Python</div>
-                                <span>Apache License 2.0</span>                            
-                                <span>Updated Mar 4</span>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div class="repo-header">
-                                <div class="repo-title-wrapper">
-                                    <a href="https://github.com/AaritDev/Albert-AI-Assistant" class="repo-title">Albert-AI-Assistant</a>
-                                    <span class="repo-badge">Public</span>
-                                </div>
-                            </div>
-                            <div class="repo-desc">Albert is a local AI terminal assistant powered by Ollama. It retains conversation logs, works fully offline, and interfaces smoothly with your nativ[...]
-                            <div class="repo-footer">
-                                <div class="lang-indicator"><span class="lang-dot" style="background:#3572A5;"></span>Python</div>
-                                <span>Apache License 2.0</span>
-                                <span>Updated Nov 4, 2025</span>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div class="repo-header">
-                                <div class="repo-title-wrapper">
-                                    <a href="#" class="repo-title">AaritOS</a>
-                                    <span class="repo-badge">Public</span>
-                                </div>
-                            </div>
-                            <div class="repo-desc">Emulated shell matching structural designs of standard modern Linux distros with built-in sandbox wrappers configured for host folder inspection.</di[...]
-                            <div class="repo-footer">
-                                <div class="lang-indicator"><span class="lang-dot" style="background:#3572A5;"></span>Python</div>
-                                <span>MIT License</span>
-                                <span>Updated Jun 4, 2025</span>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div class="repo-header">
-                                <div class="repo-title-wrapper">
-                                    <a href="#" class="repo-title">File-Organiser</a>
-                                    <span class="repo-badge">Public</span>
-                                </div>
-                            </div>
-                            <div class="repo-desc">A intuitive desktop graphical tool using Google's generative structural models combined with ttkbootstrap layout styling to dynamically index user fi[...]
-                            <div class="repo-footer">
-                                <div class="lang-indicator"><span class="lang-dot" style="background:#3572A5;"></span>Python</div>
-                                <span>MIT License</span>
-                                <span>Updated Jun 3, 2025</span>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div class="repo-header">
-                                <div class="repo-title-wrapper">
-                                    <a href="#" class="repo-title">Message-Encrypter-Source-Code</a>
-                                    <span class="repo-badge">Public</span>
-                                </div>
-                            </div>
-                            <div class="repo-desc">The internal code architecture logic behind my automated cryptography suite profile repositories.</div>
-                            <div class="repo-footer">
-                                <span>Apache License 2.0</span>
-                                <span>Updated Jun 1, 2025</span>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div class="repo-header">
-                                <div class="repo-title-wrapper">
-                                    <a href="#" class="repo-title">Message-Encrypter</a>
-                                    <span class="repo-badge">Public</span>
-                                </div>
-                            </div>
-                            <div class="repo-desc">A small straightforward graphical user window program configured for immediate local plaintext encryption and functional multi-pass cipher processing[...]
-                            <div class="repo-footer">
-                                <div class="lang-indicator"><span class="lang-dot" style="background:#3572A5;"></span>Python</div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -712,17 +613,145 @@
 
     <script>
         // Collapsible function for legacy projects
+        let reposLoaded = false;
+        
         function toggleLegacy() {
-            const content = document.getElementById('legacyContent');
-            const button = document.querySelector('.legacy-trigger-btn');
-            content.classList.toggle('open');
-            
-            if (content.classList.contains('open')) {
-                button.textContent = 'Minimize Legacy Repositories';
-            } else {
-                button.textContent = 'View Legacy Shell & Python Repositories';
+        
+            const content = document.getElementById("legacyContent");
+            const button = document.querySelector(".legacy-trigger-btn");
+        
+            content.classList.toggle("open");
+        
+            if(content.classList.contains("open"))
+                button.textContent = "Minimize Legacy Repositories";
+            else
+                button.textContent = "View Legacy Shell & Python Repositories";
+        
+            if(!reposLoaded){
+                loadRepositories();
+                reposLoaded = true;
             }
         }
+            
+                    async function loadRepositories(){
+            
+                const container = document.getElementById("repoContainer");
+            
+                container.innerHTML =
+                    "<p style='color:#8b949e;'>Loading repositories...</p>";
+            
+                try{
+            
+                    const response = await fetch(
+                        "https://api.github.com/users/AaritDev/repos"
+                    );
+            
+                    const repos = await response.json();
+            
+                    repos.sort((a,b)=>
+                        a.name.localeCompare(b.name)
+                    );
+            
+                    container.innerHTML = "";
+            
+                    repos.forEach(repo=>{
+            
+                        const language =
+                            repo.language || "Unknown";
+            
+                        const license =
+                            repo.license
+                                ? repo.license.spdx_id
+                                : "No License";
+            
+                        const updated =
+                            new Date(repo.updated_at)
+                            .toLocaleDateString();
+            
+                        const description =
+                            repo.description ||
+                            "No description provided.";
+            
+                        const colours = {
+            
+                            Python:"#3572A5",
+                            "C++":"#f34b7d",
+                            JavaScript:"#f1e05a",
+                            HTML:"#e34c26",
+                            CSS:"#563d7c",
+                            C:"#555555"
+            
+                        };
+            
+                        const colour =
+                            colours[language] || "#8b949e";
+            
+                        const card = document.createElement("div");
+            
+                        card.className = "repo-card";
+            
+                        card.innerHTML = `
+                            <div class="repo-header">
+            
+                                <div class="repo-title-wrapper">
+            
+                                    <a
+                                        class="repo-title"
+                                        href="https://github.com/AaritDev/${repo.name}"
+                                        target="_blank">
+            
+                                        ${repo.name}
+            
+                                    </a>
+            
+                                    <span class="repo-badge">
+                                        Public
+                                    </span>
+            
+                                </div>
+            
+                            </div>
+            
+                            <div class="repo-desc">
+            
+                                ${description}
+            
+                            </div>
+            
+                            <div class="repo-footer">
+            
+                                <div class="lang-indicator">
+            
+                                    <span
+                                        class="lang-dot"
+                                        style="background:${colour};">
+                                    </span>
+            
+                                    ${language}
+            
+                                </div>
+            
+                                <span>${license}</span>
+            
+                                <span>Updated ${updated}</span>
+            
+                            </div>
+                        `;
+            
+                        container.appendChild(card);
+            
+                    });
+            
+                }
+                catch{
+            
+                    container.innerHTML =
+            
+                    "<p style='color:#ff6b6b;'>Failed to load repositories.</p>";
+            
+                }
+            
+            }
 
         // Scroll reveal animation engine
         function revealOnScroll() {
