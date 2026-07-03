@@ -294,19 +294,101 @@
             line-height: 1.7;
         }
 
-        /* Projects Section */
+        /* Projects Section & Featured Card */
+        .featured-project-wrapper {
+            margin-bottom: 3rem;
+        }
+
+        .featured-project-wrapper h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--matrix-cyan);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .featured-card {
+            background: linear-gradient(135deg, rgba(20, 25, 35, 0.95) 0%, rgba(15, 17, 26, 0.95) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.05);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--matrix-cyan);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+        }
+
+        .featured-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .featured-title-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .featured-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .featured-title:hover {
+            color: var(--matrix-cyan);
+            text-decoration: underline;
+        }
+
+        .featured-badge {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--matrix-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .featured-desc {
+            color: #e2e8f0;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        .featured-footer {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+        }
+
         .upcoming-box {
             background: var(--accent-bg);
             border: 1px dashed rgba(6, 182, 212, 0.3);
             border-radius: 6px;
-            padding: 5rem 2rem;
+            padding: 3rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+            margin-bottom: 3rem;
         }
 
         .upcoming-box h3 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--matrix-cyan);
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
@@ -320,7 +402,7 @@
 
         /* Legacy Accordion Section */
         .legacy-wrapper {
-            margin-top: 4rem;
+            margin-top: 2rem;
             text-align: center;
         }
 
@@ -506,33 +588,29 @@
         /* MOBILE COMPATIBILITY MEDIA QUERIES        */
         /* ========================================= */
         @media (max-width: 768px) {
-            /* Navbar modifications to keep it usable */
             nav { flex-direction: column; gap: 0.8rem; }
             .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; display: flex; }
             
-            /* Scale down Hero Section */
             .hero-content h1 { font-size: 2.5rem; min-height: 3.5rem; margin-top: 2rem;}
             .hero-content .subtitle { font-size: 1.1rem; }
             .hero-content .description { font-size: 0.95rem; padding: 0 10px; }
             
-            /* Stack CTA buttons */
             .cta-buttons { flex-direction: column; padding: 0 20px; }
             .cta-button { width: 100%; text-align: center; }
             
-            /* Section spacing & Grids */
             section { padding: 60px 0; }
             .section-title { font-size: 1.8rem; text-align: center; }
             
-            /* Force skills grid to 1 column to stop horizontal overflow */
             .skills-grid { grid-template-columns: 1fr; }
             .upcoming-box { padding: 3rem 1rem; }
             
-            /* Make GitHub cards fit screen */
+            .featured-header { flex-direction: column; gap: 0.5rem; }
+            .featured-footer { flex-wrap: wrap; gap: 1rem; }
+
             .repo-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
             .repo-footer { flex-wrap: wrap; gap: 0.8rem; }
             .repo-title-wrapper { flex-wrap: wrap; }
             
-            /* Stack Contact Links */
             .contact-links { flex-direction: column; padding: 0 20px; }
             .contact-link { width: 100%; text-align: center; }
         }
@@ -601,8 +679,33 @@
         <div class="container">
             <h2 class="section-title reveal">Project <span>Manifest</span></h2>
             
+            <div class="featured-project-wrapper reveal">
+                <h3>System Highlight</h3>
+                <div id="featuredProjectContainer">
+                    <div class="featured-card">
+                        <div class="featured-header">
+                            <div class="featured-title-group">
+                                <a class="featured-title" href="https://github.com/AaritDev/yascript" target="_blank">yascript</a>
+                                <span class="featured-badge">Featured System</span>
+                            </div>
+                        </div>
+                        <div class="featured-desc" id="featuredDesc">
+                            Loading runtime configuration data from GitHub engine...
+                        </div>
+                        <div class="featured-footer">
+                            <div class="lang-indicator">
+                                <span class="lang-dot" style="background:#f34b7d;"></span>
+                                <span id="featuredLang">C++</span>
+                            </div>
+                            <span id="featuredLicense">MIT License</span>
+                            <span id="featuredStars">⭐ Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="upcoming-box reveal">
-                <h3>[ upcoming project... ]</h3>
+                <h3>[ upcoming architectures... ]</h3>
                 <p>Working and Learning</p>
             </div>
 
@@ -635,11 +738,37 @@
     </footer>
 
     <script>
-        // Collapsible function for legacy projects
+        const USERNAME = "aaritdev";
+        const FEATURED_REPO = "yascript";
+
+        // Fetch Featured Project metrics right on load
+        async function loadFeaturedProject() {
+            const descEl = document.getElementById("featuredDesc");
+            const starsEl = document.getElementById("featuredStars");
+            const licenseEl = document.getElementById("featuredLicense");
+            const langEl = document.getElementById("featuredLang");
+
+            try {
+                const response = await fetch(`https://api.github.com/repos/${USERNAME}/${FEATURED_REPO}`);
+                if (!response.ok) throw new Error("API Failure");
+                
+                const repo = await response.json();
+                
+                descEl.textContent = repo.description || "A minimal tape-based scripting language inspired by Brainfuck, written in high-performance C++.";
+                starsEl.textContent = `⭐ ${repo.stargazers_count} Stars`;
+                licenseEl.textContent = repo.license ? repo.license.spdx_id : "No License";
+                langEl.textContent = repo.language || "C++";
+            } catch (err) {
+                descEl.textContent = "A minimal tape-based scripting language inspired by Brainfuck, much simpler and easier to read, engineered directly in native C++.";
+                starsEl.textContent = "⭐ Active";
+                licenseEl.textContent = "MIT";
+            }
+        }
+
+        // Collapsible function for secondary repositories
         let reposLoaded = false;
         
         function toggleLegacy() {
-        
             const content = document.getElementById("legacyContent");
             const button = document.querySelector(".legacy-trigger-btn");
         
@@ -656,125 +785,69 @@
             }
         }
             
-                    async function loadRepositories(){
-            
-                const container = document.getElementById("repoContainer");
-            
-                container.innerHTML =
-                    "<p style='color:#8b949e;'>Loading repositories...</p>";
-            
-                try{
-            
-                    const response = await fetch(
-                        "https://api.github.com/users/aaritdev/repos"
-                    );
-            
-                    const repos = await response.json();
-            
-                    repos.sort((a,b)=>
-                        a.name.localeCompare(b.name)
-                    );
-            
-                    container.innerHTML = "";
-            
-                    repos.forEach(repo=>{
-            
-                        const language =
-                            repo.language || "Unknown";
-            
-                        const license =
-                            repo.license
-                                ? repo.license.spdx_id
-                                : "No License";
-            
-                        const updated =
-                            new Date(repo.updated_at)
-                            .toLocaleDateString();
-            
-                        const description =
-                            repo.description ||
-                            "No description provided.";
-            
-                        const colours = {
-            
-                            Python:"#3572A5",
-                            "C++":"#f34b7d",
-                            JavaScript:"#f1e05a",
-                            HTML:"#e34c26",
-                            CSS:"#563d7c",
-                            C:"#555555"
-            
-                        };
-            
-                        const colour =
-                            colours[language] || "#8b949e";
-            
-                        const card = document.createElement("div");
-            
-                        card.className = "repo-card";
-            
-                        card.innerHTML = `
-                            <div class="repo-header">
-            
-                                <div class="repo-title-wrapper">
-            
-                                    <a
-                                        class="repo-title"
-                                        href="https://github.com/aaritdev/${repo.name}"
-                                        target="_blank">
-            
-                                        ${repo.name}
-            
-                                    </a>
-            
-                                    <span class="repo-badge">
-                                        Public
-                                    </span>
-            
-                                </div>
-            
-                            </div>
-            
-                            <div class="repo-desc">
-            
-                                ${description}
-            
-                            </div>
-            
-                            <div class="repo-footer">
-            
-                                <div class="lang-indicator">
-            
-                                    <span
-                                        class="lang-dot"
-                                        style="background:${colour};">
-                                    </span>
-            
-                                    ${language}
-            
-                                </div>
-            
-                                <span>${license}</span>
-            
-                                <span>Updated ${updated}</span>
-            
-                            </div>
-                        `;
-            
-                        container.appendChild(card);
-            
-                    });
-            
+        async function loadRepositories(){
+            const container = document.getElementById("repoContainer");
+            container.innerHTML = "<p style='color:#8b949e; text-align:center;'>Loading architecture manifest...</p>";
+        
+            try {
+                const response = await fetch(`https://api.github.com/users/${USERNAME}/repos`);
+                let repos = await response.json();
+        
+                // Filter out yascript so it's not duplicate listed under general repos
+                repos = repos.filter(repo => repo.name.toLowerCase() !== FEATURED_REPO.toLowerCase());
+
+                repos.sort((a,b)=> a.name.localeCompare(b.name));
+                container.innerHTML = "";
+        
+                if (repos.length === 0) {
+                    container.innerHTML = "<p style='color:#8b949e; text-align:center;'>No auxiliary repositories found.</p>";
+                    return;
                 }
-                catch{
-            
-                    container.innerHTML =
-            
-                    "<p style='color:#ff6b6b;'>Failed to load repositories.</p>";
-            
-                }
-            
+
+                repos.forEach(repo=>{
+                    const language = repo.language || "Unknown";
+                    const license = repo.license ? repo.license.spdx_id : "No License";
+                    const updated = new Date(repo.updated_at).toLocaleDateString();
+                    const description = repo.description || "No description provided.";
+        
+                    const colours = {
+                        Python:"#3572A5",
+                        "C++":"#f34b7d",
+                        JavaScript:"#f1e05a",
+                        HTML:"#e34c26",
+                        CSS:"#563d7c",
+                        C:"#555555"
+                    };
+        
+                    const colour = colours[language] || "#8b949e";
+                    const card = document.createElement("div");
+                    card.className = "repo-card";
+        
+                    card.innerHTML = `
+                        <div class="repo-header">
+                            <div class="repo-title-wrapper">
+                                <a class="repo-title" href="${repo.html_url}" target="_blank">
+                                    ${repo.name}
+                                </a>
+                                <span class="repo-badge">Public</span>
+                            </div>
+                        </div>
+                        <div class="repo-desc">${description}</div>
+                        <div class="repo-footer">
+                            <div class="lang-indicator">
+                                <span class="lang-dot" style="background:${colour};"></span>
+                                ${language}
+                            </div>
+                            <span>${license}</span>
+                            <span>Updated ${updated}</span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch {
+                container.innerHTML = "<p style='color:#ff6b6b; text-align:center;'>Failed to retrieve secondary repository logs.</p>";
             }
+        }
 
         // Scroll reveal animation engine
         function revealOnScroll() {
@@ -801,7 +874,6 @@
                     i++;
                     setTimeout(type, speed);
                 } else {
-                    // Typing finished -> Slide in everything else
                     document.querySelectorAll('.hero-content .subtitle, .hero-content .description, .hero-content .cta-buttons').forEach(el => {
                         el.classList.add('reveal-text');
                     });
@@ -811,6 +883,7 @@
         }
 
         window.addEventListener('load', function() {
+            loadFeaturedProject();
             const heroTitle = document.getElementById('typewriter-title');
             if (heroTitle) {
                 const originalText = heroTitle.textContent;
